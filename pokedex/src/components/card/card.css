@@ -1,0 +1,11 @@
+.button:disabled {
+  cursor: not-allowed;
+}
+
+.image {
+  background-position: top center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 150px;
+  width: 100%;
+}
