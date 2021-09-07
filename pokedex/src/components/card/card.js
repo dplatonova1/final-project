@@ -3,13 +3,8 @@ import { Link } from "react-router-dom";
 
 import "./card.css";
 
-const Card = ({ pokemon }) => {
-  const [isCaught, setIsCaught] = useState(false);
-  const { name, id } = pokemon;
-
-  const onCatchClick = () => {
-    setIsCaught(true);
-  };
+const Card = ({ pokemon, onCatchClick }) => {
+  const { name, id, isCaught } = pokemon;
 
   const getPokemonImg = (id) => {
     try {
@@ -19,14 +14,6 @@ const Card = ({ pokemon }) => {
         return require(`../../utils/pokemon-pictures/unknown.png`).default;
       else throw error;
     }
-  };
-
-  const getData = (itemId) => {
-    itemId.then((item) => {
-      this.setState({
-        item,
-      });
-    });
   };
 
   return (
@@ -39,11 +26,10 @@ const Card = ({ pokemon }) => {
       </Link>
       <button
         className="button bg-red-500 hover:bg-red-700 text-gray-50 rounded-lg p-2 w-full disabled:opacity-50 font-semibold"
-        disabled={isCaught}
         onClick={onCatchClick}
-        isCaught={isCaught}
+        disabled={isCaught}
       >
-        {!isCaught ? "Catch it!" : "Caught!"}
+        {!isCaught ? "Catch it!" : "Caught"}
       </button>
     </div>
   );

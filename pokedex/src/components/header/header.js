@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import "./header.css";
-
 const Header = () => {
   return (
     <div className="flex bg-yellow-400 h-16 justify-center items-center">

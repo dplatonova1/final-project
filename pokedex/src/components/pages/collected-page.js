@@ -1,12 +1,33 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import Container from "../container";
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { fetchCaughtPokemons } from "../../actions";
+import PokemonListContainer from "../../containers";
+import { withPokemonService } from "../hoc";
 
-const CollectedPage = () => {
-  const collected = useSelector((state) =>
-    state.pokemons.filter((pokemon) => pokemon.id < 5)
-  );
-  return <Container pokemons={collected} />;
+class CollectedPage extends Component {
+  componentDidMount() {
+    this.props.pokemonService.getCaughtPokemons();
+  }
+  render() {
+    const { pokemons } = this.props;
+
+    return <PokemonListContainer pokemons={pokemons} />;
+  }
+}
+
+const mapStateToProps = ({ pokemons, loading }) => {
+  return {
+    pokemons,
+    loading,
+  };
 };
 
-export default CollectedPage;
+const mapDispatchToProps = (dispatch, { pokemonService }) => {
+  return {
+    getCaughtPokemons: fetchCaughtPokemons(pokemonService, dispatch),
+  };
+};
+
+export default withPokemonService()(
+  connect(mapStateToProps, mapDispatchToProps)(CollectedPage)
+);
