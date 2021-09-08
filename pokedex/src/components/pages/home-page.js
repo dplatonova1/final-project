@@ -1,26 +1,31 @@
-import React, { Component } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { fetchPokemons } from "../../actions";
 import PokemonListContainer from "../../containers";
 import { withPokemonService } from "../hoc";
 
-class HomePage extends Component {
-  componentDidMount() {
-    this.props.fetchPokemons();
-  }
-  render() {
-    const { pokemons } = this.props;
+export function HomePage({ pokemons, fetchPokemons }) {
+  let pageNumber = 1;
+  let limit = 9;
+  useEffect(() => {
+    fetchPokemons(pageNumber, limit);
+  }, [fetchPokemons, pageNumber, limit]);
 
-    return <PokemonListContainer pokemons={pokemons} />;
-  }
+  return (
+    <div className="w-full flex flex-col items-center">
+      <PokemonListContainer pokemons={pokemons} />
+      <button
+        className="mt-6 w-1/5 bg-purple-600 h-16 rounded-md p-4 text-gray-50"
+        onClick={() => {
+          limit += limit;
+          fetchPokemons(pageNumber, limit);
+        }}
+      >
+        Load more pokemons
+      </button>
+    </div>
+  );
 }
-
-const mapStateToProps = ({ pokemons, loading }) => {
-  return {
-    pokemons,
-    loading,
-  };
-};
 
 const mapDispatchToProps = (dispatch, { pokemonService }) => {
   return {
@@ -29,5 +34,5 @@ const mapDispatchToProps = (dispatch, { pokemonService }) => {
 };
 
 export default withPokemonService()(
-  connect(mapStateToProps, mapDispatchToProps)(HomePage)
+  connect(null, mapDispatchToProps)(HomePage)
 );

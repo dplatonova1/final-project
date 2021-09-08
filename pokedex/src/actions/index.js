@@ -18,10 +18,10 @@ const pokemonsError = (error) => {
   };
 };
 
-const fetchPokemons = (pokemonService, dispatch) => () => {
+const fetchPokemons = (pokemonService, dispatch) => (pageNumber, limit) => {
   dispatch(pokemonsRequested());
   pokemonService
-    .getPokemons()
+    .getPokemons(pageNumber, limit)
     .then((data) => dispatch(pokemonsLoaded(data)))
     .catch((error) => dispatch(pokemonsError(error)));
 };

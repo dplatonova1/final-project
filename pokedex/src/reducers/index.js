@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action.type);
   switch (action.type) {
     case "FETCH_POKEMONS_REQUEST":
       return {
@@ -37,21 +36,21 @@ const reducer = (state = initialState, action) => {
       const pokemon = state.pokemons.find(
         (pokemon) => pokemon.id === pokemonID
       );
-      const updatedPok = {
+      const updatedPokemon = {
         id: pokemon.id,
         name: pokemon.name,
         isCaught: true,
       };
-      service.putPokemon(updatedPok);
-      const pkemons = [updatedPok].concat(
+      service.putPokemon(updatedPokemon);
+      const newPokemons = [updatedPokemon].concat(
         state.pokemons.filter((x) => x.id !== pokemonID)
       );
 
       let caught = state.collectedPokemons;
-      caught = caught.concat([updatedPok]);
+      caught = caught.concat([updatedPokemon]);
       return {
         ...state,
-        pokemons: pkemons,
+        pokemons: newPokemons,
         collectedPokemons: caught,
       };
 

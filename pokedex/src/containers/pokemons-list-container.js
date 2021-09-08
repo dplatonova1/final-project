@@ -1,24 +1,26 @@
-import React, { Component } from "react";
+import React from "react";
 import { connect } from "react-redux";
 import Loading from "../components/loading";
-import { fetchPokemons, pokemonCaught } from "../actions";
+import { pokemonCaught } from "../actions";
 import { withPokemonService } from "../components/hoc";
 import ErrorIndicator from "../components/error-indicator";
 import PokemonsList from "../components/pokemons-list";
 
-class PokemonListContainer extends Component {
-  render() {
-    const { pokemons, loading, error, onCatchClick } = this.props;
-    if (error) {
-      return <ErrorIndicator />;
-    }
-
-    if (loading) {
-      return <Loading />;
-    }
-
-    return <PokemonsList pokemons={pokemons} onCatchClick={onCatchClick} />;
+export function PokemonListContainer({
+  pokemons,
+  loading,
+  error,
+  onCatchClick,
+}) {
+  if (error) {
+    return <ErrorIndicator />;
   }
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  return <PokemonsList pokemons={pokemons} onCatchClick={onCatchClick} />;
 }
 
 const mapStateToProps = ({ pokemons, loading }) => {
@@ -28,9 +30,8 @@ const mapStateToProps = ({ pokemons, loading }) => {
   };
 };
 
-const mapDispatchToProps = (dispatch, { pokemonService }) => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    // fetchPokemons: fetchPokemons(pokemonService, dispatch),
     onCatchClick: (id) => dispatch(pokemonCaught(id)),
   };
 };

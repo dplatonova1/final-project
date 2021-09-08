@@ -1,3 +1,3 @@
-import PokemonCard from "./card";
+import { PokemonCard, getPokemonImg } from "./card";
 
-export default PokemonCard;
+export { PokemonCard, getPokemonImg };

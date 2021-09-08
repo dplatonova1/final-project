@@ -1,7 +1,7 @@
 export default class PokemonService {
-  getPokemons = async () => {
+  getPokemons = async (pageNumber, limit) => {
     const res = await fetch(
-      "http://localhost:8000/pokemons?_sort=id&_order=asc&_page=1&_limit=10"
+      `http://localhost:8000/pokemons?_sort=id&_order=asc&_page=${pageNumber}&_limit=${limit}`
     );
 
     if (!res.ok) {
