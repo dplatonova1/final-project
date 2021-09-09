@@ -31,6 +31,12 @@ const reducer = (state = initialState, action) => {
         error: action.payload,
       };
 
+    case "FETCH_MORE_POKEMONS":
+      return {
+        ...state,
+        pokemons: [...state.pokemons, ...action.payload],
+      };
+
     case "POKEMON_CAUGHT":
       const pokemonID = action.payload;
       const pokemon = state.pokemons.find(

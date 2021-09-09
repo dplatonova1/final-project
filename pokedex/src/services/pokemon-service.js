@@ -12,7 +12,7 @@ export default class PokemonService {
 
   getCaughtPokemons = async () => {
     const res = await fetch(
-      "http://localhost:8000/pokemons?isCaught=true&_page=1&_limit=10"
+      `http://localhost:8000/pokemons?isCaught=true&_page=1&_limit=9`
     );
 
     if (!res.ok) {

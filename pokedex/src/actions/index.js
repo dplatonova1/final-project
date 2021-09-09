@@ -41,4 +41,17 @@ const fetchCaughtPokemons = (pokemonService, dispatch) => {
     .catch((error) => dispatch(pokemonsError(error)));
 };
 
-export { fetchPokemons, pokemonCaught, fetchCaughtPokemons };
+const fetchMorePokemons = (pokemonService, dispatch) => (pageNumber, limit) => {
+  const newPokemons = [];
+  pokemonService
+    .getPokemons(pageNumber, limit)
+    .then((data) => dispatch(pokemonsLoaded(data)))
+    .catch((error) => dispatch(pokemonsError(error)));
+
+  return {
+    type: "LOAD_MORE_POKEMONS",
+    payload: newPokemons,
+  };
+};
+
+export { fetchPokemons, pokemonCaught, fetchCaughtPokemons, fetchMorePokemons };

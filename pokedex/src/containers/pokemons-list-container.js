@@ -20,7 +20,14 @@ export function PokemonListContainer({
     return <Loading />;
   }
 
-  return <PokemonsList pokemons={pokemons} onCatchClick={onCatchClick} />;
+  return (
+    <PokemonsList
+      pokemons={pokemons.sort((a, b) => {
+        return a.id - b.id;
+      })}
+      onCatchClick={onCatchClick}
+    />
+  );
 }
 
 const mapStateToProps = ({ pokemons, loading }) => {
