@@ -56,6 +56,12 @@ const reducer = (state = initialState, action) => {
         pokemons: newPokemons,
       };
 
+    case "FETCH_MORE_CAUGHT_POKEMONS":
+      return {
+        ...state,
+        pokemons: [...state.pokemons, ...action.payload],
+      };
+
     default:
       return state;
   }

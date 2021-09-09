@@ -33,13 +33,14 @@ const pokemonCaught = (pokemonID) => {
   };
 };
 
-const fetchCaughtPokemons = (pokemonService, dispatch) => {
-  dispatch(pokemonsRequested());
-  pokemonService
-    .getCaughtPokemons()
-    .then((data) => dispatch(pokemonsLoaded(data)))
-    .catch((error) => dispatch(pokemonsError(error)));
-};
+const fetchCaughtPokemons =
+  (pokemonService, dispatch) => (pageNumber, limit) => {
+    dispatch(pokemonsRequested());
+    pokemonService
+      .getCaughtPokemons(pageNumber, limit)
+      .then((data) => dispatch(pokemonsLoaded(data)))
+      .catch((error) => dispatch(pokemonsError(error)));
+  };
 
 const fetchMorePokemons = (pokemonService, dispatch) => (pageNumber, limit) => {
   const newPokemons = [];
@@ -54,4 +55,23 @@ const fetchMorePokemons = (pokemonService, dispatch) => (pageNumber, limit) => {
   };
 };
 
-export { fetchPokemons, pokemonCaught, fetchCaughtPokemons, fetchMorePokemons };
+const fetchMoreCaughtPokemons =
+  (pokemonService, dispatch) => (pageNumber, limit) => {
+    const newCaughtPokemons = [];
+    pokemonService
+      .getCaughtPokemons(pageNumber, limit)
+      .then((data) => dispatch(pokemonsLoaded(data)))
+      .catch((error) => dispatch(pokemonsError(error)));
+    return {
+      type: "FETCH_MORE_CAUGHT_POKEMONS",
+      payload: newCaughtPokemons,
+    };
+  };
+
+export {
+  fetchPokemons,
+  pokemonCaught,
+  fetchCaughtPokemons,
+  fetchMorePokemons,
+  fetchMoreCaughtPokemons,
+};
