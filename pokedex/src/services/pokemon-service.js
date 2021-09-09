@@ -11,9 +11,7 @@ export default class PokemonService {
   };
 
   getCaughtPokemons = async () => {
-    const res = await fetch(
-      `http://localhost:8000/pokemons?isCaught=true&_page=1&_limit=9`
-    );
+    const res = await fetch(`http://localhost:8000/pokemons?isCaught=true`);
 
     if (!res.ok) {
       throw Error("No data fetched from that resource");

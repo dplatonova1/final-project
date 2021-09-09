@@ -4,7 +4,6 @@ const initialState = {
   pokemons: [],
   loading: true,
   error: null,
-  collectedPokemons: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -52,12 +51,9 @@ const reducer = (state = initialState, action) => {
         state.pokemons.filter((x) => x.id !== pokemonID)
       );
 
-      let caught = state.collectedPokemons;
-      caught = caught.concat([updatedPokemon]);
       return {
         ...state,
         pokemons: newPokemons,
-        collectedPokemons: caught,
       };
 
     default:

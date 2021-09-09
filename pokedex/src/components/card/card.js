@@ -18,9 +18,13 @@ const PokemonCard = ({ pokemon, onCatchClick }) => {
   return (
     <div className="bg-gray-100 md:w-auto rounded-lg p-2 border-4 border-gray-600 shadow-lg overflow-hidden hover:shadow-xl">
       <Link to={`/pokemons/${id}`}>
-        <img className="w-full image" src={getPokemonImg(id)} alt={name} />
+        <img
+          className="w-full image hover:border-4"
+          src={getPokemonImg(id)}
+          alt={name}
+        />
         <p>
-          Pokemon name: {name.slice(0, 1).toUpperCase().concat(name.slice(1))}
+          Pokemon name: {name.charAt(0).toUpperCase().concat(name.slice(1))}
         </p>
       </Link>
       <button

@@ -7,7 +7,7 @@ import { withPokemonService } from "../hoc";
 
 export function CollectedPage() {
   const pokemons = useSelector((state) => {
-    return state.pokemons.filter((item) => item.isCaught);
+    return state.pokemons;
   });
 
   if (pokemons.length === 0) {

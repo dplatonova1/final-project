@@ -49,7 +49,7 @@ const fetchMorePokemons = (pokemonService, dispatch) => (pageNumber, limit) => {
     .catch((error) => dispatch(pokemonsError(error)));
 
   return {
-    type: "LOAD_MORE_POKEMONS",
+    type: "FETCH_MORE_POKEMONS",
     payload: newPokemons,
   };
 };
